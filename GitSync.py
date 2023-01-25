@@ -12,6 +12,7 @@ from git import Repo
 #gt.SyncRepo(gitDir)
 
 print("GitSync is running")
+gt.GitSync()
 
 # Schedule the SyncRepo function to run every 5 minutes
 schedule.every(5).minutes.do(gt.GitSync)
