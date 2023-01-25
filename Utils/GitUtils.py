@@ -12,6 +12,7 @@ def GitSync():
     repositoriesDict = gu.ReadPreferences()
 
     for repo in repositoriesDict:
+        print(f'Syncing Repository: {repo["name"]}')
         SyncRepo(repo["repo_dir"])
         time.sleep(1)
 
@@ -29,8 +30,7 @@ def SyncPush(repo):
             if branch.commit.hexsha == remote_branch.commit.hexsha:
                 print("Local and remote branches are in sync, no need to push.")
                 return
-            if branch.commit > remote_branch.commit:
-                # Local branch is ahead of remote branch, so push the changes
+            else:
                 repo.git.push()
                 print(f"Pushed changes to {remote_branch}.")
         else:
@@ -55,14 +55,7 @@ def SyncRepo(RepoDirectory):
 
     # check if there are untracked files
     if repo.untracked_files:
-        # print("There are untracked files")
-        # print the list of untracked files
-        # print(repo.untracked_files)
-        # add new files to the index
         repo.git.add(all=True)
-    # else:
-    #     print("There are no untracked files")
-
 
     # if there are changes in the repository then add them to the index, them commit them
     if repo.is_dirty():
