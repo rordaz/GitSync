@@ -2,24 +2,13 @@
 {
     "repositories": [
         {
-            "name": "testRepo",
-            "description": "This is a test git repository.",
-            "repo_dir": "C:\\Users\\H508391\\source\\repos\\TestRepo",
-            "created_at": "2022-01-01T12:00:00Z",
-            "last_push_at": "2022-01-02T15:30:00Z",
-            "language": "Text",
-            "private": false,
-            "sync_frequency": "hourly",
-            "sync_frequency_factor": 1
-        },
-        {
             "name": "Obsidian",
-            "description": "Obsidian Repository.",
-            "repo_dir": "C:\\Users\\H508391\\source\\repos\\ObsidianNotes",
+            "description": "This is a test git repository.",
+            "repo_dir": "/Users/rafael/Python/GitSync",
             "created_at": "2022-01-01T12:00:00Z",
             "last_push_at": "2022-01-02T15:30:00Z",
             "language": "Markdown",
-            "private": false,
+            "private": true,
             "sync_frequency": "hourly",
             "sync_frequency_factor": 1
         }
