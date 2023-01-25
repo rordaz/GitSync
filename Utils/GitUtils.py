@@ -11,9 +11,9 @@ def GitSync():
     #read the program preferences
     repositoriesDict = gu.ReadPreferences()
 
-    for repo in repositoriesDict:
-        print(f'Syncing Repository: {repo["name"]}')
-        SyncRepo(repo["repo_dir"])
+    for repositoryPrefs in repositoriesDict:
+        print(f'Syncing Repository: {repositoryPrefs["name"]}')
+        SyncRepo(repositoryPrefs)
         time.sleep(1)
 
 def SyncPush(repo):
@@ -39,8 +39,9 @@ def SyncPush(repo):
         print("Error while pushing changes to remote repository:", e)
         return
 
-def SyncRepo(RepoDirectory):
+def SyncRepo(repoPrefs):
 
+    RepoDirectory = repoPrefs["repo_dir"]
     # get current time and date
     currentTime = time.strftime("%H:%M:%S")
 
@@ -60,7 +61,7 @@ def SyncRepo(RepoDirectory):
     # if there are changes in the repository then add them to the index, them commit them
     if repo.is_dirty():
         print("There are changes in the repository, will commit")
-        commitMessage = GetCommitMessage()
+        commitMessage = GetCommitMessage(repoPrefs["auto_commit_message"])
         # add the tracked files to the index
         repo.git.add(all=True)
         # add new files to the index
@@ -102,5 +103,5 @@ def SyncRemote(RepoDirectory):
         return
 
 # create a function that outputs the current time and date to string with the format "DDMMYYYY_HHMMSS"
-def GetCommitMessage():
-    return "Auto Commit by GitSync " + time.strftime("%m%d%Y_%H%M%S") + "_W"
+def GetCommitMessage(commitMessage):
+    return  commitMessage + time.strftime(" %m%d%Y_%H%M%S")

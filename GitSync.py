@@ -1,4 +1,3 @@
-
 import schedule
 import time
 import Utils.GitUtils as gt
