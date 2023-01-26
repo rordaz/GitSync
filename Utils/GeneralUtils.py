@@ -1,6 +1,5 @@
 import json
-
-# create a function to read user preferences from a json file
+ 
 def ReadPreferences():
 
     prefDict = []

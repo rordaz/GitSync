@@ -2,18 +2,13 @@ import schedule
 import time
 import Utils.GitUtils as gt
 import Utils.GeneralUtils as gu
-from git import Repo
-
-# Path to the local repository
-#gitDir = r"C:\Users\H508391\source\repos\TestRepo"
-
-# Run the SyncRepo function once at the start of the program
-#gt.SyncRepo(gitDir)
+from git.repo import Repo
 
 print("GitSync is running")
 gt.GitSync()
 
 # Schedule the SyncRepo function to run every 5 minutes
+# todo: make this configurable
 schedule.every(5).minutes.do(gt.GitSync)
 
 while True:
