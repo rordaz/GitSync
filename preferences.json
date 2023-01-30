@@ -4,7 +4,7 @@
         {
             "name": "Obsidian",
             "description": "Obsidian note taking repo.",
-            "repo_dir": "C:/Users/H508391/source/repos/ObsidianNotes",
+            "repo_dir": "/Users/user_name/ObsidianNotes",
             "created_at": "2022-01-01T12:00:00Z",
             "last_push_at": "2022-01-02T15:30:00Z",
             "language": "Markdown",
