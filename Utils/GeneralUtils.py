@@ -1,9 +1,7 @@
 import json
  
 def ReadPreferences():
-
     prefDict = []
-    
     try:
         with open('preferences.json') as preferences:
             data = json.load(preferences)
