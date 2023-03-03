@@ -10,13 +10,15 @@ def GitSync():
 
     for repositoryPrefs in repositoriesDict:
         print(f'Syncing Repository: {repositoryPrefs["name"]}')
+        currentTime = time.strftime("%H:%M:%S")
+        print("GitSync function is running at " + currentTime)
+        # GetListOfModifiedFiles(repositoryPrefs["repo_dir"])
         SyncRepo(repositoryPrefs)
         time.sleep(1)
 
 def SyncPush(repo):
     
     branch = repo.active_branch
-    
     remote_branch = branch.tracking_branch()
     
     try:
@@ -36,9 +38,6 @@ def SyncPush(repo):
 def SyncRepo(repoPrefs):
 
     RepoDirectory = repoPrefs["repo_dir"]
-    currentTime = time.strftime("%H:%M:%S")
-
-    print("SyncRepo function is running at " + currentTime)
     try:
         repo = Repo(RepoDirectory)
     except:
@@ -46,11 +45,15 @@ def SyncRepo(repoPrefs):
         repo = Repo.init(RepoDirectory)
         print("Repository is initialized")
 
+    files_to_commit = GetListOfCommitFiles(RepoDirectory)
+
     if repo.untracked_files:
         repo.git.add(all=True)
-
+    
     if repo.is_dirty():
-        print("There are changes in the repository, will commit")
+        print("There are changes in the repository, will commit the following files:")
+        print(files_to_commit["new"])
+        print(files_to_commit["modified"])
         commitMessage = GetCommitMessage(repoPrefs["auto_commit_message"])
         repo.git.add(all=True)
         repo.git.commit(m=commitMessage)
@@ -86,3 +89,35 @@ def SyncRemote(RepoDirectory):
 
 def GetCommitMessage(commitMessage):
     return  commitMessage + time.strftime(" %m%d%Y_%H%M%S")
+
+def GetListOfCommitFiles(RepoDirectory):
+    repository = Repo(RepoDirectory)
+    message_modified_files = "Modified files: "
+    message_new_files = "New files: "
+
+    modified_files = repository.index.diff(None)
+    if modified_files:
+        for file in modified_files:
+            message_modified_files += GetFileName(file.a_path) + ", "
+    else:
+        message_modified_files += " none, "
+    
+    new_files = repository.untracked_files
+    if new_files:
+        for file in new_files:
+            message_new_files += GetFileName(file) + ", "
+    else:
+        message_new_files += " none, "
+    # create an empty dictionary
+    committed_files = {}
+    # add new files to the dictionary
+    committed_files["new"] = message_new_files[:-2]
+    # add modified files to the dictionary
+    committed_files["modified"] = message_modified_files[:-2]
+    return committed_files
+
+    
+def GetFileName(path):
+    lastSlash = path.rfind("/")
+    fileName = path[lastSlash + 1:]
+    return fileName
