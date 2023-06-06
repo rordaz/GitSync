@@ -4,3 +4,5 @@
 **/.vscode/
 **/bin/
 **/Utils/__pycache__/
+preferences.dev.json
+.env
