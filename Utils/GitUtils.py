@@ -9,6 +9,8 @@ def GitSync():
     repositoriesDict = gu.ReadPreferences()
 
     for repositoryPrefs in repositoriesDict:
+        if repositoryPrefs["active"] == False:
+            continue
         print(f'Syncing Repository: {repositoryPrefs["name"]}')
         currentTime = time.strftime("%H:%M:%S")
         print("GitSync function is running at " + currentTime)
