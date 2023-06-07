@@ -11,13 +11,11 @@
       "sync_frequency": "hourly",
       "sync_frequency_factor": 1,
       "auto_commit_message": "Auto Commit by GitSync (W)",
-      "active": false
+      "active": true
     }
   ],
-  "app": [
-    {
-      "job_schedule": "minute",
-      "job_schedule_factor": 1
-    }
-  ]
+  "app": {
+    "job_schedule_frequency": "minute",
+    "job_schedule_factor": 5
+  }
 }
