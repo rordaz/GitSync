@@ -2,11 +2,7 @@ import time
 from git.repo import Repo
 import Utils.GeneralUtils as gu
 
-repositoriesDict = []
-
-def GitSync():
-
-    repositoriesDict = gu.ReadPreferences()
+def GitSync(repositoriesDict):
 
     for repositoryPrefs in repositoriesDict:
         if repositoryPrefs["active"] == False:

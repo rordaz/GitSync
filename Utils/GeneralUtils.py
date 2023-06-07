@@ -9,8 +9,9 @@ env = os.getenv('ENV')
  
 def ReadPreferences():
 
-    if env == 'development':
+    if env == 'Development':
         json_file_path = 'preferences.dev.json'
+        
     else:
         json_file_path = 'preferences.json'
     prefDict = []
@@ -24,3 +25,21 @@ def ReadPreferences():
         print("Error reading the preferences file")
         quit()
     return prefDict
+
+def ReadApplicationSettings():
+    if env == 'Development':
+        json_file_path = 'preferences.dev.json'
+        print("Loading preferences.dev.json")
+    else:
+        json_file_path = 'preferences.json'
+    appSettings = {}
+    try:
+        with open(json_file_path) as preferences:
+            data = json.load(preferences)
+
+        for setting in data["app"]:
+            appSettings[setting] = data["app"][setting]
+    except:
+        print("Error reading the preferences file")
+        quit()
+    return appSettings
