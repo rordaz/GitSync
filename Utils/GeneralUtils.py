@@ -25,8 +25,10 @@ def ReadPreferences():
 
         for repository in data["repositories"]:
             prefDict.append(repository)
-    except:
+    except Exception as e:
         print("Error reading the preferences file")
+        print("Please make sure the file exists and is in the correct format: " + json_file_path)
+        print("Exception: " + str(e))
         quit()
     return prefDict
 
@@ -47,7 +49,10 @@ def ReadApplicationSettings():
 
         for setting in data["app"]:
             appSettings[setting] = data["app"][setting]
-    except:
-        print("Error reading the preferences file")
+    except Exception as e:
+        print("Error reading the app settings file")
+        print("Please make sure the file exists and is in the correct format: " + json_file_path)
+        # print the exception error message
+        print("Exception: " + str(e))
         quit()
     return appSettings
