@@ -3,6 +3,9 @@
 **/obj/
 **/.vscode/
 **/bin/
-**/Utils/__pycache__/
 preferences.dev.json
+preferences.prod.json
+preferences.testing.json
 .env
+# wildcard for all .pyc files
+*.pyc
