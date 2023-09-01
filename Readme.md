@@ -64,6 +64,7 @@ This assumes that you have an Obsidian Vault that you want to sync to Github.
 git init
 git add .
 ```
+
 5. Create a .gitignore file in the root of your Obsidian Vault and add the following:
 
 ```gitignore
@@ -77,6 +78,7 @@ THIS_FOLDER_IS_IGNORED/
 # Obsidian Vault Settings
 .obsidian/workspace.json
 ```
+
 6. Commit your changes and push to Github
 
 ```bash
@@ -86,8 +88,16 @@ git remote add origin https://github.com/USER_NAME/REPO_NAME.git
 git push -u origin main
 ```
 
-#### Run the script
+### Run the script
 
 ```python
+python3 gitSync.py
+```
+
+### Creating a batch file for Windows
+
+```bash
+@echo off
+cd C:\Users\USER_NAME\PATH_TO_SCRIPT
 python3 gitSync.py
 ```
