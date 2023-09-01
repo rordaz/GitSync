@@ -11,9 +11,13 @@ def ReadPreferences():
 
     if env == 'Development':
         json_file_path = 'preferences.dev.json'
-        
-    else:
+    
+    if env == 'Testing':
+        json_file_path = 'preferences.testing.json'
+    
+    if env == 'Production':
         json_file_path = 'preferences.json'
+    
     prefDict = []
     try:
         with open(json_file_path) as preferences:
@@ -29,9 +33,13 @@ def ReadPreferences():
 def ReadApplicationSettings():
     if env == 'Development':
         json_file_path = 'preferences.dev.json'
-        print("Loading preferences.dev.json")
-    else:
+    
+    if env == 'Testing':
+        json_file_path = 'preferences.testing.json'
+    
+    if env == 'Production':
         json_file_path = 'preferences.json'
+        
     appSettings = {}
     try:
         with open(json_file_path) as preferences:
